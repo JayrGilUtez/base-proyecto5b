@@ -2,7 +2,10 @@ package mx.edu.utez.baseproyecto5b.model;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
-
+//@Getter
+//@Setter
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 public class Student {
     @Id

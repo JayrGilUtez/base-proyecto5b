@@ -19,9 +19,10 @@ public class Subject {
     private String name;
     private String teacher;
 
-    public Subject(){
+    public Subject() {
 
     }
+
     public Subject(long id, String name, String teacher) {
         this.id = id;
         this.name = name;
