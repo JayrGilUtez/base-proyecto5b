@@ -6,9 +6,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
 
-</AnchorPane>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="mx.edu.utez.baseproyecto5b.controller.AssignController"
+          hgap="10" vgap="10">
+
+    <!-- Tabla 1  -->
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" spacing="5">
+        <TextField fx:id="searchField1" promptText="Buscar en Tabla 1"/>
+        <TableView fx:id="table1" prefHeight="200" prefWidth="300">
+            <columns>
+                <TableColumn text="Columna 1"/>
+            </columns>
+        </TableView>
+    </VBox>
+
+    <!-- Tabla 2 -->
+    <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" spacing="5">
+        <TextField fx:id="searchField2" promptText="Buscar en Tabla 2"/>
+        <TableView fx:id="table2" prefHeight="200" prefWidth="300">
+            <columns>
+                <TableColumn text="Columna 2"/>
+            </columns>
+        </TableView>
+    </VBox>
+
+</GridPane>

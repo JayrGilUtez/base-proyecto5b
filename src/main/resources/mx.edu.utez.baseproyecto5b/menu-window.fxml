@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.baseproyecto5b.controller.MenuController">
 
-</AnchorPane>
+    <Button fx:id="assignButton" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onAssignButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Asignación" />
+    <Button fx:id="studentButton" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onMouseClicked="#onStudentButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Alumno" />
+    <Button fx:id="subjectButton" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onSubjectButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Materia" />
+    <Button fx:id="backButton" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onCloseButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Salir" />
+</VBox>

@@ -1,4 +1,5 @@
 package mx.edu.utez.baseproyecto5b.controller;
 
-public class AssignWindowController {
+public class AssignController {
+
 }
