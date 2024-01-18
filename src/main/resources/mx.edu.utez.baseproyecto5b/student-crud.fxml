@@ -38,7 +38,7 @@
     </VBox>
 
     <!-- Columna derecha -->
-    <TableView fx:id="tableView" GridPane.columnIndex="1">
+    <TableView fx:id="tableView" editable="true" GridPane.columnIndex="1">
         <columns>
             <TableColumn fx:id="nameColumn" text="Name" />
             <TableColumn fx:id="surnameColumn" text="Surname" />

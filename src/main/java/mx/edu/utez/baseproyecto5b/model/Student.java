@@ -15,12 +15,15 @@ public class Student {
     private String lastname;
     private String age;
 
-    public Student(){
-
-    }
-
     public Student(long id, String name, String surname, String lastname, String age) {
         this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.lastname = lastname;
+        this.age = age;
+    }
+
+    public Student(String name, String surname, String lastname, String age) {
         this.name = name;
         this.surname = surname;
         this.lastname = lastname;

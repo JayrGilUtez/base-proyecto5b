@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.baseproyecto5b.controller.MenuController">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-    <Button fx:id="assignButton" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onAssignButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Asignación" />
-    <Button fx:id="studentButton" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onMouseClicked="#onStudentButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Alumno" />
-    <Button fx:id="subjectButton" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onSubjectButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Materia" />
-    <Button fx:id="backButton" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onCloseButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Salir" />
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="mx.edu.utez.baseproyecto5b.controller.MenuController"
+      alignment="CENTER" spacing="10.0">
+    <Button fx:id="assignButton" onAction="#onAssignButtonClick" text="Asignación"
+            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
+            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
+    <Button fx:id="studentButton" onAction="#onStudentButtonClick" text="Alumno"
+            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
+            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
+    <Button fx:id="subjectButton" onAction="#onSubjectButtonClick" text="Materia"
+            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
+            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
+    <Button fx:id="backButton" onAction="#onCloseButtonClick" text="Salir"
+            style="-fx-background-color: #155e72; -fx-text-fill: white; -fx-font-weight: bold;"
+            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
 </VBox>

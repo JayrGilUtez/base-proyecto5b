@@ -9,11 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import mx.edu.utez.baseproyecto5b.database.BoxStoreManager;
 import mx.edu.utez.baseproyecto5b.model.Student;
@@ -57,6 +55,7 @@ public class StudentController implements Initializable {
     @FXML
     private TableView<Student> tableView = new TableView<>();
 
+
     @FXML
     private TableColumn<Student, String> nameColumn = new TableColumn<>();
 
@@ -92,12 +91,16 @@ public class StudentController implements Initializable {
 
     @FXML
     void onDeleteButtonClick() {
-        studentBox.removeAll();
-
+        List<Student> studentsSelected =  tableView.getSelectionModel().getSelectedItems();
+        for(Student student: studentsSelected){
+            studentBox.remove(student);
+        }
+        refreshTableData();
     }
 
     @FXML
     void onUpdateButtonClick() {
+        refreshTableData();
 
     }
 
@@ -121,24 +124,82 @@ public class StudentController implements Initializable {
             );
 
             studentBox.put(student);
+            refreshTableData();
+
 
         }
     }
 
+    @FXML
+    private void refreshTableData() {
+        tableView.getItems().clear();
+        tableView.getItems().addAll(studentBox.getAll());
+    }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Student> studentsCollection = FXCollections.observableArrayList(studentBox.getAll());
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
         tableView.setItems(studentsCollection);
 
-        List<Student> allStudents = studentBox.getAll();
-        System.out.println("Lista de todos los usuarios:");
-        for (Student s : allStudents) {
+
+        upDateData();
+        // solo para ver los datos alamacenados en la consola
+        List<Student> list = tableView.getItems();
+        for (Student student : list){
+            System.out.println(student);
+        }
+        System.out.println("--");
+        List<Student> students = studentBox.getAll();
+        for(Student s : students){
             System.out.println(s);
         }
+
+
+
+    }
+
+    private void upDateData(){
+        nameColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
+        nameColumn.setOnEditCommit(event ->{
+            Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            student.setName(event.getNewValue());
+            studentBox.put(student);
+            System.out.println(student.getName() + " name was uptdate to " + event.getNewValue() + " at row " + (event.getTablePosition().getRow() + 1));
+        });
+        // ---
+        surnameColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
+        surnameColumn.setOnEditCommit(event ->{
+            Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            student.setSurname(event.getNewValue());
+            studentBox.put(student);
+            System.out.println(student.getSurname() + " surname was uptdate to " + event.getNewValue() + " at row " + (event.getTablePosition().getRow() + 1));
+        });
+        // ---
+        lastnameColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
+        lastnameColumn.setOnEditCommit(event ->{
+            Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            student.setLastname(event.getNewValue());
+            studentBox.put(student);
+            System.out.println(student.getLastname() + " lastname was uptdate to " + event.getNewValue() + " at row " + (event.getTablePosition().getRow() + 1));
+        });
+        // ---
+        ageColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
+        ageColumn.setOnEditCommit(event ->{
+            Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            student.setAge(event.getNewValue());
+            studentBox.put(student);
+            System.out.println(student.getAge() + " age was uptdate to " + event.getNewValue() + " at row " + (event.getTablePosition().getRow() + 1));
+        });
+        // ---
+
+
 
     }
 
