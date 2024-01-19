@@ -36,9 +36,33 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "5:5259655420644155128",
+      "lastPropertyId": "3:934318064109825613",
+      "name": "Subject",
+      "properties": [
+        {
+          "id": "1:5615727448265521508",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4729197689545853084",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:934318064109825613",
+          "name": "teacher",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "4:1714377333137772595",
+  "lastEntityId": "5:5259655420644155128",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

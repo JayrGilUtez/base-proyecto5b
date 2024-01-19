@@ -2,6 +2,8 @@ package mx.edu.utez.baseproyecto5b.model;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToMany;
+
 //@Getter
 //@Setter
 //@AllArgsConstructor
@@ -14,6 +16,9 @@ public class Student {
     private String surname;
     private String lastname;
     private String age;
+
+    public ToMany<Subject> subjects;
+
 
     public Student(long id, String name, String surname, String lastname, String age) {
         this.id = id;
