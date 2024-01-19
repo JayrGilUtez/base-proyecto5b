@@ -20,7 +20,7 @@
         <Label style="-fx-font-weight: bold; -fx-font-size: 20px">Alumnos:</Label>
         <HBox alignment="CENTER" spacing="5">
             <TextField fx:id="studentSearchField" prefHeight="26.0" prefWidth="216.0" promptText="Buscar alumnos" />
-            <Button fx:id="studentSearchBtn" onAction="#buscarButtonClicked" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Buscar" />
+            <Button fx:id="studentSearchBtn" onAction="#onsearchButtonClicked" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Buscar" />
         </HBox>
         <TableView fx:id="studentsTable" prefHeight="200" prefWidth="300">
             <columns>
@@ -37,7 +37,7 @@
         <Label style="-fx-font-weight: bold; -fx-font-size: 20px">Materias:</Label>
         <HBox alignment="CENTER" spacing="5">
             <TextField fx:id="subjectSearchField" prefHeight="26.0" prefWidth="216.0" promptText="Buscar materias" />
-            <Button fx:id="subjectSearchBtn" onAction="#buscarButtonClicked" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Buscar" />
+            <Button fx:id="subjectSearchBtn" onAction="#onsearchButtonClicked" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Buscar" />
         </HBox>
         <TableView fx:id="subjectTable" prefHeight="200" prefWidth="300">
             <columns>

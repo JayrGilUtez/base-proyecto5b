@@ -55,7 +55,6 @@ public class StudentController implements Initializable {
     @FXML
     private TableView<Student> tableView = new TableView<>();
 
-
     @FXML
     private TableColumn<Student, String> nameColumn = new TableColumn<>();
 
