@@ -1,14 +1,18 @@
 package mx.edu.utez.baseproyecto5b.controller;
 
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
-public class MenuController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MenuController implements Initializable {
 
     @FXML
     private Button assignButton;
@@ -39,7 +43,7 @@ public class MenuController {
     }
 
     @FXML
-    public void onCloseButtonClick(ActionEvent event) {
+    public void onCloseButtonClick() {
 
     }
 
@@ -66,7 +70,7 @@ public class MenuController {
             Scene scene = new Scene(root);
             Stage currentStage = (Stage) subjectButton.getScene().getWindow();
             currentStage.setScene(scene);
-            currentStage.setTitle("Estudiantes");
+            currentStage.setTitle("Materias");
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -75,8 +79,8 @@ public class MenuController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
-
-
+    }
 }

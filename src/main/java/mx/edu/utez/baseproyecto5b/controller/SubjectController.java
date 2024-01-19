@@ -1,44 +1,76 @@
 package mx.edu.utez.baseproyecto5b.controller;
 
-import javafx.event.ActionEvent;
+import io.objectbox.Box;
+import io.objectbox.BoxStore;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import mx.edu.utez.baseproyecto5b.database.BoxStoreManager;
+import mx.edu.utez.baseproyecto5b.model.Subject;
 
-public class SubjectController {
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class SubjectController implements Initializable {
+
+    //<editor-fold desc="BoxStore">
+    BoxStore boxStore = BoxStoreManager.getBoxStore();
+    Box<Subject> subjectBox = BoxStoreManager.getBoxStore().boxFor(Subject.class);
+
+    //</editor-fold>
+
+
+    //<editor-fold desc="textFields">
+
+    @FXML
+    private TextField txtFieldSubject;
+
+    @FXML
+    private TextField txtFieldTeacher;
+
+    //</editor-fold>
+
+
+    //<editor-fold desc="tableView">
+
+
+    @FXML
+    private TableView<Subject> tableView = new TableView<>();
+
+    @FXML
+    private TableColumn<Subject, String> subjectColumn = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Subject, String> teacherColumn = new TableColumn<>();
+
+    //</editor-fold>
+
+    //<editor-fold desc="Buttons">
 
     @FXML
     private Button backButton;
 
     @FXML
-    private Button buttonDelete;
+    private Button insertBtn;
 
     @FXML
-    private Button buttonInsert;
+    private Button updateBtn;
 
     @FXML
-    private Button buttonUpdate;
+    private Button deleteBtn;
 
-    @FXML
-    private TableColumn<?, ?> column1;
+    //</editor-fold>
 
-    @FXML
-    private TableColumn<?, ?> column2;
-
-    @FXML
-    private TableView<?> tableView;
-
-    @FXML
-    private TextField textField1;
-
-    @FXML
-    private TextField textField2;
+    //<editor-fold desc="OnActions">
 
     @FXML
     void onBackButtonClick() {
@@ -49,24 +81,101 @@ public class SubjectController {
             Stage currentStage = (Stage) backButton.getScene().getWindow();
             currentStage.setScene(scene);
             currentStage.setTitle("Estudiantes");
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    @FXML
-    void onDeleteButtonClick(ActionEvent event) {
 
     }
 
     @FXML
-    void onInsertButtonClick(ActionEvent event) {
+    void onDeleteButtonClick() {
+        List<Subject> subjectsSelected = tableView.getSelectionModel().getSelectedItems();
+        for(Subject subject : subjectsSelected){
+            subjectBox.remove(subject);
+        }
+        refreshTableData();
+    }
+
+    @FXML
+    void onInsertButtonClick() {
+        if (txtFieldSubject.getText().isBlank() || txtFieldTeacher.getText().isBlank()) {
+            System.out.println("No se han llenado todos los campos");
+        } else {
+            Subject subject = new Subject(0, txtFieldSubject.getText(), txtFieldTeacher.getText());
+            subjectBox.put(subject);
+            refreshTableData();
+        }
+        cleanTextFields();
 
     }
 
     @FXML
-    void onUpdateButtonClick(ActionEvent event) {
+    void onUpdateButtonClick() {
+        refreshTableData();
 
     }
+
+    @FXML
+    private void refreshTableData() {
+        tableView.getItems().clear();
+        tableView.getItems().addAll(subjectBox.getAll());
+    }
+
+    @FXML
+    private void cleanTextFields(){
+        txtFieldSubject.setText("");
+        txtFieldTeacher.setText("");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<Subject> subjectsCollection = FXCollections.observableArrayList(subjectBox.getAll());
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        subjectColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        teacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacher"));
+        tableView.setItems(subjectsCollection);
+
+        updateData();
+
+        List<Subject> list = tableView.getItems();
+        System.out.println("------");
+        for (Subject subject : list) {
+            System.out.println(subject);
+        }
+        List<Subject> subjects = subjectBox.getAll();
+        System.out.println("------");
+        for (Subject s : subjects) {
+            System.out.println(s);
+        }
+
+
+    }
+
+    //</editor-fold>
+
+    //<editor-fold desc="Methods">
+
+    private void updateData() {
+        subjectColumn.setCellFactory(TextFieldTableCell.<Subject>forTableColumn());
+        subjectColumn.setOnEditCommit(event -> {
+            Subject subject = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            subject.setName((event.getNewValue()));
+            subjectBox.put(subject);
+        });
+
+        // ---
+
+        teacherColumn.setCellFactory(TextFieldTableCell.<Subject>forTableColumn());
+        teacherColumn.setOnEditCommit(event -> {
+            Subject subject = event.getTableView().getItems().get(event.getTablePosition().getRow());
+            subject.setTeacher((event.getNewValue()));
+            subjectBox.put(subject);
+        });
+
+    }
+
+    //</editor-fold>
+
 
 }

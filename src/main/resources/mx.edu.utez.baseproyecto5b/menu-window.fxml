@@ -6,9 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="mx.edu.utez.baseproyecto5b.controller.MenuController"
-      alignment="CENTER" spacing="10.0">
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.baseproyecto5b.controller.MenuController" alignment="CENTER" spacing="10.0">
     <Button fx:id="assignButton" onAction="#onAssignButtonClick" text="Asignación"
             style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
             minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>

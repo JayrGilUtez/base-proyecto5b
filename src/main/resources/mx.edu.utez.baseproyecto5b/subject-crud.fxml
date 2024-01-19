@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 <GridPane alignment="CENTER" hgap="20.0" vgap="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.baseproyecto5b.controller.SubjectController">
     <padding>
@@ -13,16 +21,16 @@
     <VBox spacing="20.0">
         <VBox spacing="10.0">
             <Label style="-fx-font-weight: bold;" text="Subject:" />
-            <TextField fx:id="textField1" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtFieldSubject" HBox.hgrow="ALWAYS" />
         </VBox>
         <VBox spacing="10.0">
             <Label style="-fx-font-weight: bold;" text="Teacher:" />
-            <TextField fx:id="textField2" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="txtFieldTeacher" HBox.hgrow="ALWAYS" />
         </VBox>
         <HBox spacing="10.0">
-            <Button fx:id="buttonInsert" onAction="#onInsertButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Insertar" />
-            <Button fx:id="buttonUpdate" onAction="#onUpdateButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Actualizar" />
-            <Button fx:id="buttonDelete" onAction="#onDeleteButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Eliminar" />
+            <Button fx:id="insertBtn" onAction="#onInsertButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Insertar" />
+            <Button fx:id="updateBtn" onAction="#onUpdateButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Actualizar" />
+            <Button fx:id="deleteBtn" onAction="#onDeleteButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Eliminar" />
         </HBox>
         <VBox alignment="CENTER" spacing="10.0">
             <Button fx:id="backButton" maxHeight="30" maxWidth="215" minHeight="30" minWidth="215" onAction="#onBackButtonClick" style="-fx-background-color: #155e72; -fx-text-fill: white; -fx-font-weight: bold;" text="Volver" />
@@ -30,10 +38,10 @@
     </VBox>
 
     <!-- Columna derecha -->
-    <TableView fx:id="tableView" GridPane.columnIndex="1">
+    <TableView fx:id="tableView" editable="true" GridPane.columnIndex="1">
         <columns>
-            <TableColumn fx:id="column1" prefWidth="124.0" text="Subject" />
-            <TableColumn fx:id="column2" prefWidth="122.0" text="Teacher" />
+            <TableColumn fx:id="subjectColumn" prefWidth="124.0" text="Subject" />
+            <TableColumn fx:id="teacherColumn" prefWidth="122.0" text="Teacher" />
         </columns>
     </TableView>
     <columnConstraints>

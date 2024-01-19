@@ -125,8 +125,7 @@ public class StudentController implements Initializable {
 
             studentBox.put(student);
             refreshTableData();
-
-
+            cleanTextFields();
         }
     }
 
@@ -134,6 +133,15 @@ public class StudentController implements Initializable {
     private void refreshTableData() {
         tableView.getItems().clear();
         tableView.getItems().addAll(studentBox.getAll());
+    }
+
+    @FXML
+    private void cleanTextFields(){
+        txtFieldName.setText("");
+        txtFieldSurname.setText("");
+        txtFieldLastName.setText("");
+        txtFieldAge.setText("");
+
     }
 
 
@@ -149,14 +157,17 @@ public class StudentController implements Initializable {
         tableView.setItems(studentsCollection);
 
 
-        upDateData();
+        updateData();
+
+
         // solo para ver los datos alamacenados en la consola
         List<Student> list = tableView.getItems();
+        System.out.println("------");
         for (Student student : list){
             System.out.println(student);
         }
-        System.out.println("--");
         List<Student> students = studentBox.getAll();
+        System.out.println("------");
         for(Student s : students){
             System.out.println(s);
         }
@@ -165,13 +176,12 @@ public class StudentController implements Initializable {
 
     }
 
-    private void upDateData(){
+    private void updateData(){
         nameColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
         nameColumn.setOnEditCommit(event ->{
             Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
             student.setName(event.getNewValue());
             studentBox.put(student);
-            System.out.println(student.getName() + " name was uptdate to " + event.getNewValue() + " at row " + (event.getTablePosition().getRow() + 1));
         });
         // ---
         surnameColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
