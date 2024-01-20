@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.baseproyecto5b.controller.MenuController" alignment="CENTER" spacing="10.0">
-    <Button fx:id="assignButton" onAction="#onAssignButtonClick" text="Asignación"
-            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
-            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
-    <Button fx:id="studentButton" onAction="#onStudentButtonClick" text="Alumno"
-            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
-            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
-    <Button fx:id="subjectButton" onAction="#onSubjectButtonClick" text="Materia"
-            style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;"
-            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
-    <Button fx:id="backButton" onAction="#onCloseButtonClick" text="Salir"
-            style="-fx-background-color: #155e72; -fx-text-fill: white; -fx-font-weight: bold;"
-            minWidth="150" maxWidth="150" minHeight="40" maxHeight="40"/>
-</VBox>
+<Pane prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.edu.utez.baseproyecto5b.controller.MenuController">
+   <VBox alignment="CENTER" layoutX="223.0" layoutY="97.0">
+      <children>
+          <Button fx:id="assignButton" alignment="CENTER" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onAssignButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Asignación">
+            <VBox.margin>
+               <Insets bottom="15.0" />
+            </VBox.margin>
+         </Button>
+          <Button fx:id="studentButton" alignment="CENTER" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onStudentButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Alumno">
+            <VBox.margin>
+               <Insets bottom="15.0" />
+            </VBox.margin>
+         </Button>
+          <Button fx:id="subjectButton" alignment="CENTER" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onSubjectButtonClick" style="-fx-background-color: #185093; -fx-text-fill: white; -fx-font-weight: bold;" text="Materia">
+            <VBox.margin>
+               <Insets bottom="15.0" />
+            </VBox.margin>
+         </Button>
+          <Button fx:id="backButton" alignment="CENTER" maxHeight="40" maxWidth="150" minHeight="40" minWidth="150" onAction="#onCloseButtonClick" style="-fx-background-color: #155e72; -fx-text-fill: white; -fx-font-weight: bold;" text="Salir" />
+      </children>
+   </VBox>
+</Pane>

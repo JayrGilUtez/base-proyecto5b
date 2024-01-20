@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import mx.edu.utez.baseproyecto5b.database.BoxStoreManager;
+import mx.edu.utez.baseproyecto5b.model.Student;
 import mx.edu.utez.baseproyecto5b.model.Subject;
 
 import java.net.URL;
@@ -137,18 +138,17 @@ public class SubjectController implements Initializable {
         tableView.setItems(subjectsCollection);
 
         updateData();
-
+        // solo para ver los datos alamacenados en la consola
         List<Subject> list = tableView.getItems();
-        System.out.println("------");
+        System.out.println("------------------------------------------------------");
         for (Subject subject : list) {
-            System.out.println(subject);
+            //System.out.println(subject);
+            System.out.println(subject.getName() + " students:{\n");
+            for(Student s : subject.students){
+                System.out.println(s);
+            }
+            System.out.println("\n}\n");
         }
-        List<Subject> subjects = subjectBox.getAll();
-        System.out.println("------");
-        for (Subject s : subjects) {
-            System.out.println(s);
-        }
-
 
     }
 

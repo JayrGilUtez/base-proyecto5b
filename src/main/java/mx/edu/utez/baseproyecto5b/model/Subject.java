@@ -5,12 +5,6 @@ import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.relation.ToMany;
 
-
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
-
 @Entity
 public class Subject {
     @Id
@@ -19,6 +13,8 @@ public class Subject {
     private String teacher;
     @Backlink(to = "subjects")
     public ToMany<Student> students;
+
+
 
     //<editor-fold desc="Adding example">
 
@@ -43,6 +39,15 @@ public class Subject {
 
     public Subject() {
 
+
+
+    }
+
+    public Subject(long id, String name, String teacher, ToMany<Student> students) {
+        this.id = id;
+        this.name = name;
+        this.teacher = teacher;
+        this.students = students;
     }
 
     public Subject(long id, String name, String teacher) {
@@ -77,10 +82,12 @@ public class Subject {
 
     @Override
     public String toString() {
-        return "Subject{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", teacher='" + teacher + '\'' +
-                '}';
+        return name;
+
+
     }
+    /*
+    return "Subject {" + "name: " + name + "teacher:" + teather +"}";
+     */
+
 }

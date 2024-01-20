@@ -15,6 +15,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import mx.edu.utez.baseproyecto5b.database.BoxStoreManager;
 import mx.edu.utez.baseproyecto5b.model.Student;
+import mx.edu.utez.baseproyecto5b.model.Subject;
 
 import java.net.URL;
 import java.util.List;
@@ -89,7 +90,7 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    void onDeleteButtonClick() {
+    public void onDeleteButtonClick() {
         List<Student> studentsSelected =  tableView.getSelectionModel().getSelectedItems();
         for(Student student: studentsSelected){
             studentBox.remove(student);
@@ -98,14 +99,14 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    void onUpdateButtonClick() {
+    public void onUpdateButtonClick() {
         refreshTableData();
 
     }
 
     //</editor-fold>
     @FXML
-    void onInsertButtonClick() {
+    public void onInsertButtonClick() {
         if (
                 txtFieldName.getText().isBlank()
                         || txtFieldSurname.getText().isBlank()
@@ -155,23 +156,19 @@ public class StudentController implements Initializable {
         ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
         tableView.setItems(studentsCollection);
 
-
         updateData();
-
 
         // solo para ver los datos alamacenados en la consola
         List<Student> list = tableView.getItems();
-        System.out.println("------");
+        System.out.println("------------------------------------------------------");
         for (Student student : list){
-            System.out.println(student);
+            //System.out.println(student);
+            System.out.println(student.getName() + " subjects:{\n");
+            for(Subject s : student.subjects){
+                System.out.println(s);
+            }
+            System.out.println("\n}\n");
         }
-        List<Student> students = studentBox.getAll();
-        System.out.println("------");
-        for(Student s : students){
-            System.out.println(s);
-        }
-
-
 
     }
 
@@ -188,7 +185,6 @@ public class StudentController implements Initializable {
             Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
             student.setSurname(event.getNewValue());
             studentBox.put(student);
-            System.out.println(student.getSurname() + " surname was uptdate to " + event.getNewValue() + " at row " + (event.getTablePosition().getRow() + 1));
         });
         // ---
         lastnameColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
@@ -196,7 +192,6 @@ public class StudentController implements Initializable {
             Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
             student.setLastname(event.getNewValue());
             studentBox.put(student);
-            System.out.println(student.getLastname() + " lastname was uptdate to " + event.getNewValue() + " at row " + (event.getTablePosition().getRow() + 1));
         });
         // ---
         ageColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
@@ -204,7 +199,6 @@ public class StudentController implements Initializable {
             Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
             student.setAge(event.getNewValue());
             studentBox.put(student);
-            System.out.println(student.getAge() + " age was uptdate to " + event.getNewValue() + " at row " + (event.getTablePosition().getRow() + 1));
         });
         // ---
 

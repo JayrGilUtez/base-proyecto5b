@@ -18,8 +18,8 @@ import javafx.stage.Stage;
 import mx.edu.utez.baseproyecto5b.database.BoxStoreManager;
 import mx.edu.utez.baseproyecto5b.model.Student;
 import mx.edu.utez.baseproyecto5b.model.Subject;
-
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AssignController implements Initializable {
@@ -44,9 +44,9 @@ public class AssignController implements Initializable {
     @FXML
     private Button subjectSearchBtn;
     @FXML
-    private Button toLeftBtn;
+    private Button studentsToSubjects;
     @FXML
-    private Button toRightBtn;
+    private Button subjectsToStudents;
     @FXML
     private Button backBtn;
     //</editor-fold>
@@ -73,6 +73,31 @@ public class AssignController implements Initializable {
     private TableColumn<Subject, String> teacherColumn = new TableColumn<>();
 
     //</editor-fold>
+
+    @FXML
+    public void onStudentsToSubjects() {
+        List<Student> studentsSelected = studentsTable.getSelectionModel().getSelectedItems();
+        List<Subject> subjectsSelected = subjectTable.getSelectionModel().getSelectedItems();
+
+        for(Student student : studentsSelected){
+            student.subjects.addAll(subjectsSelected);
+            boxStore.boxFor(Student.class).put(student);
+        }
+    }
+
+    @FXML
+    public void onSubjectsToStudents() {
+        List<Student> studentsSelected = studentsTable.getSelectionModel().getSelectedItems();
+        List<Subject> subjectsSelected = subjectTable.getSelectionModel().getSelectedItems();
+        for (Subject subject : subjectsSelected) {
+            subject.students.addAll(studentsSelected);
+            boxStore.boxFor(Subject.class).put(subject);
+
+        }
+
+
+
+    }
 
     //<editor-fold desc="Other methods">
     @FXML
@@ -190,4 +215,6 @@ public class AssignController implements Initializable {
         //</editor-fold>
 
     }
+
+
 }
