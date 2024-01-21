@@ -13,33 +13,9 @@ public class Subject {
     private String teacher;
     @Backlink(to = "subjects")
     public ToMany<Student> students;
-
-
-
-    //<editor-fold desc="Adding example">
-
-    /*
-    Teacher teacher1 = new Teacher("Teacher 1");
-    Teacher teacher2 = new Teacher("Teacher 2");
-
-    Student student1 = new Student();
-    student1.teachers.add(teacher1);
-    student1.teachers.add(teacher2);
-
-    Student student2 = new Student();
-    student2.teachers.add(teacher2);
-
-    // Puts students and teachers:
-    boxStore.boxFor(Student.class).put(student1, student2);
-
-     */
-
-
     //</editor-fold>
 
     public Subject() {
-
-
 
     }
 

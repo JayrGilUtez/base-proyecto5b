@@ -49,6 +49,8 @@ public class StudentController implements Initializable {
 
     @FXML
     private TextField txtFieldAge;
+
+
     //</editor-fold>
 
 
@@ -67,6 +69,9 @@ public class StudentController implements Initializable {
 
     @FXML
     private TableColumn<Student, String> ageColumn = new TableColumn<>();
+
+
+
     //</editor-fold>
 
 
@@ -144,6 +149,12 @@ public class StudentController implements Initializable {
 
     }
 
+    //<editor-fold desc="add buttons to column">
+    /*
+
+
+     */
+    //</editor-fold>
 
 
     @Override
@@ -154,20 +165,20 @@ public class StudentController implements Initializable {
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+
         tableView.setItems(studentsCollection);
 
         updateData();
 
         // solo para ver los datos alamacenados en la consola
-        List<Student> list = tableView.getItems();
+        List<Student> list = studentBox.getAll();
         System.out.println("------------------------------------------------------");
         for (Student student : list){
-            //System.out.println(student);
-            System.out.println(student.getName() + " subjects:{\n");
+            System.out.println("Alumno: " + student.getName() + "\nMaterias:\n");
             for(Subject s : student.subjects){
                 System.out.println(s);
             }
-            System.out.println("\n}\n");
+
         }
 
     }

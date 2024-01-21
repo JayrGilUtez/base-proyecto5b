@@ -2,12 +2,11 @@ package mx.edu.utez.baseproyecto5b.model;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.annotation.Transient;
 import io.objectbox.relation.ToMany;
+import javafx.scene.control.Button;
 
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
+
 @Entity
 public class Student {
     @Id
@@ -45,6 +44,15 @@ public class Student {
         this.surname = surname;
         this.lastname = lastname;
         this.age = age;
+    }
+
+
+    public Student(String name, String surname, String lastname, String age, ToMany<Subject> subjects) {
+        this.name = name;
+        this.surname = surname;
+        this.lastname = lastname;
+        this.age = age;
+        this.subjects = subjects;
     }
 
     public long getId() {

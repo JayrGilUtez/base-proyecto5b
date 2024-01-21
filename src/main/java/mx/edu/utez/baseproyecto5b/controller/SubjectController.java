@@ -128,6 +128,7 @@ public class SubjectController implements Initializable {
         txtFieldSubject.setText("");
         txtFieldTeacher.setText("");
     }
+    //</editor-fold>
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -139,20 +140,18 @@ public class SubjectController implements Initializable {
 
         updateData();
         // solo para ver los datos alamacenados en la consola
-        List<Subject> list = tableView.getItems();
+        List<Subject> list = subjectBox.getAll();
         System.out.println("------------------------------------------------------");
         for (Subject subject : list) {
-            //System.out.println(subject);
-            System.out.println(subject.getName() + " students:{\n");
+            System.out.println("Materia: " + subject.getName() + "\nAlumnos:\n");
             for(Student s : subject.students){
-                System.out.println(s);
+                System.out.println("- "+ s);
             }
-            System.out.println("\n}\n");
+            System.out.println("------------------------------------------------------");
         }
 
     }
 
-    //</editor-fold>
 
     //<editor-fold desc="Methods">
 

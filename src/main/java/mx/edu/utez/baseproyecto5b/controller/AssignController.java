@@ -62,6 +62,7 @@ public class AssignController implements Initializable {
     private TableColumn<Student, String> lastnameColumn = new TableColumn<>();
     @FXML
     private TableColumn<Student, Integer> ageColumn = new TableColumn<>();
+
     //</editor-fold>
 
     //<editor-fold desc="Subject table">
@@ -126,12 +127,14 @@ public class AssignController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Obtenemos todos los estudiantes y los mostramos a travez de la ObservableList: studentsCollection
         ObservableList<Student> studentsCollection = FXCollections.observableArrayList(studentBox.getAll());
+
         studentsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
         studentsTable.setItems(studentsCollection);
+
 
         // Obtenemos todas las materias y las mostramos a travez de la ObservableList: subjectsCollection
         ObservableList<Subject> subjectsCollection = FXCollections.observableArrayList(subjectBox.getAll());
@@ -179,7 +182,6 @@ public class AssignController implements Initializable {
         studentsTable.setItems(studentsSortedList);
 
         //</editor-fold>
-
 
 
         //<editor-fold desc="Dinamic search materias">
