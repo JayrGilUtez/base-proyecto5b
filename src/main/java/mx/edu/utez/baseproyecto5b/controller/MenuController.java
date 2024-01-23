@@ -1,6 +1,5 @@
 package mx.edu.utez.baseproyecto5b.controller;
 
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,23 +7,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
 
+    //<editor-fold desc="Buttons">
     @FXML
     private Button assignButton;
-
     @FXML
     private Button backButton;
-
     @FXML
     private Button studentButton;
-
     @FXML
     private Button subjectButton;
+    //</editor-fold>
+
+    //<editor-fold desc="onClick() methods">
 
     @FXML
     public void onAssignButtonClick() {
@@ -36,15 +35,15 @@ public class MenuController implements Initializable {
             currentStage.setScene(scene);
             currentStage.setTitle("Estudiantes");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     @FXML
     public void onCloseButtonClick() {
-
+        // Para terminar la ejecucion del programa
+        System.exit(0);
     }
 
     @FXML
@@ -57,7 +56,7 @@ public class MenuController implements Initializable {
             currentStage.setScene(scene);
             currentStage.setTitle("Estudiantes");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -72,12 +71,11 @@ public class MenuController implements Initializable {
             currentStage.setScene(scene);
             currentStage.setTitle("Materias");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
-
+    //</editor-fold>
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

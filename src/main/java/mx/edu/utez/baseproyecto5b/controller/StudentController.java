@@ -22,10 +22,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class StudentController implements Initializable {
-    BoxStore boxStore = BoxStoreManager.getBoxStore();
-    Box<Student> studentBox = BoxStoreManager.getBoxStore().boxFor(Student.class);
 
-    //<editor-fold desc="Elementos @FXML">
+    //<editor-fold desc="BoxStore">
+    Box<Student> studentBox = BoxStoreManager.getBoxStore().boxFor(Student.class);
+    //</editor-fold>
+
+    //<editor-fold desc="Buttons">
     @FXML
     private Button backButton;
 
@@ -37,7 +39,9 @@ public class StudentController implements Initializable {
 
     @FXML
     private Button buttonUpdate;
+    //</editor-fold>
 
+    //<editor-fold desc="TextFields">
     @FXML
     private TextField txtFieldName;
 
@@ -49,10 +53,7 @@ public class StudentController implements Initializable {
 
     @FXML
     private TextField txtFieldAge;
-
-
     //</editor-fold>
-
 
     //<editor-fold desc="TableView">
     @FXML
@@ -71,13 +72,9 @@ public class StudentController implements Initializable {
     private TableColumn<Student, String> ageColumn = new TableColumn<>();
 
 
-
     //</editor-fold>
 
-
-    //<editor-fold desc="Metodos para los botones">
-
-
+    //<editor-fold desc="onClick methods">
     @FXML
     public void onClickBackButton() {
         try {
@@ -93,23 +90,19 @@ public class StudentController implements Initializable {
         }
 
     }
-
     @FXML
     public void onDeleteButtonClick() {
-        List<Student> studentsSelected =  tableView.getSelectionModel().getSelectedItems();
-        for(Student student: studentsSelected){
+        List<Student> studentsSelected = tableView.getSelectionModel().getSelectedItems();
+        for (Student student : studentsSelected) {
             studentBox.remove(student);
         }
         refreshTableData();
     }
-
     @FXML
     public void onUpdateButtonClick() {
         refreshTableData();
 
     }
-
-    //</editor-fold>
     @FXML
     public void onInsertButtonClick() {
         if (
@@ -133,29 +126,24 @@ public class StudentController implements Initializable {
             cleanTextFields();
         }
     }
+    //</editor-fold>
+
+    //<editor-fold desc="Refresh table and clean fields">
 
     @FXML
     private void refreshTableData() {
         tableView.getItems().clear();
         tableView.getItems().addAll(studentBox.getAll());
     }
-
     @FXML
-    private void cleanTextFields(){
+    private void cleanTextFields() {
         txtFieldName.setText("");
         txtFieldSurname.setText("");
         txtFieldLastName.setText("");
         txtFieldAge.setText("");
 
     }
-
-    //<editor-fold desc="add buttons to column">
-    /*
-
-
-     */
     //</editor-fold>
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -165,56 +153,59 @@ public class StudentController implements Initializable {
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
-
+        // Agregamos los datos a la tabla
         tableView.setItems(studentsCollection);
 
+        // Para actualizar los datos que hayan sido editados por medio de las celdas.
         updateData();
 
-        // solo para ver los datos alamacenados en la consola
+        //Con esto podemos ver por medio de la consola los datos
+        //alamacenados en la base de datos y verificar que las relaciones esten funcionando correctamente
+
         List<Student> list = studentBox.getAll();
         System.out.println("------------------------------------------------------");
-        for (Student student : list){
-            System.out.println("Alumno: " + student.getName() + "\nMaterias:\n");
-            for(Subject s : student.subjects){
+        for (Student student : list) {
+            System.out.println("Alumno: " + student.getName() + "\nMaterias:");
+            for (Subject s : student.subjects) {
                 System.out.println(s);
             }
-
+            System.out.println("------------------------------------------------------");
         }
-
     }
 
-    private void updateData(){
+    //<editor-fold desc="Edit and updateData">
+
+    // Este metodo es para poder editar y actualizar los datos por medio de las celdas
+    private void updateData() {
+        // to edit name cell
         nameColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
-        nameColumn.setOnEditCommit(event ->{
+        nameColumn.setOnEditCommit(event -> {
             Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
             student.setName(event.getNewValue());
             studentBox.put(student);
         });
-        // ---
+        // to edit surname cell
         surnameColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
-        surnameColumn.setOnEditCommit(event ->{
+        surnameColumn.setOnEditCommit(event -> {
             Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
             student.setSurname(event.getNewValue());
             studentBox.put(student);
         });
-        // ---
+        // to edit lastname cell
         lastnameColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
-        lastnameColumn.setOnEditCommit(event ->{
+        lastnameColumn.setOnEditCommit(event -> {
             Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
             student.setLastname(event.getNewValue());
             studentBox.put(student);
         });
-        // ---
+        // to edit age cell
         ageColumn.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
-        ageColumn.setOnEditCommit(event ->{
+        ageColumn.setOnEditCommit(event -> {
             Student student = event.getTableView().getItems().get(event.getTablePosition().getRow());
             student.setAge(event.getNewValue());
             studentBox.put(student);
         });
-        // ---
-
-
-
     }
+    //</editor-fold>
 
 }

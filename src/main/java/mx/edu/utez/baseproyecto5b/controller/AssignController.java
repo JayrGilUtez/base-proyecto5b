@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import mx.edu.utez.baseproyecto5b.database.BoxStoreManager;
 import mx.edu.utez.baseproyecto5b.model.Student;
 import mx.edu.utez.baseproyecto5b.model.Subject;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -65,7 +66,7 @@ public class AssignController implements Initializable {
 
     //</editor-fold>
 
-    //<editor-fold desc="Subject table">
+    //<editor-fold desc="Subjects table">
     @FXML
     private TableView<Subject> subjectTable = new TableView<>();
     @FXML
@@ -75,12 +76,12 @@ public class AssignController implements Initializable {
 
     //</editor-fold>
 
+    //<editor-fold desc="Asging methods">
     @FXML
     public void onStudentsToSubjects() {
         List<Student> studentsSelected = studentsTable.getSelectionModel().getSelectedItems();
         List<Subject> subjectsSelected = subjectTable.getSelectionModel().getSelectedItems();
-
-        for(Student student : studentsSelected){
+        for (Student student : studentsSelected) {
             student.subjects.addAll(subjectsSelected);
             boxStore.boxFor(Student.class).put(student);
         }
@@ -93,12 +94,9 @@ public class AssignController implements Initializable {
         for (Subject subject : subjectsSelected) {
             subject.students.addAll(studentsSelected);
             boxStore.boxFor(Subject.class).put(subject);
-
         }
-
-
-
     }
+    //</editor-fold>
 
     //<editor-fold desc="Other methods">
     @FXML
@@ -115,11 +113,9 @@ public class AssignController implements Initializable {
             Stage currentStage = (Stage) backBtn.getScene().getWindow();
             currentStage.setScene(scene);
             currentStage.setTitle("Estudiantes");
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
     //</editor-fold>
 
@@ -127,14 +123,12 @@ public class AssignController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Obtenemos todos los estudiantes y los mostramos a travez de la ObservableList: studentsCollection
         ObservableList<Student> studentsCollection = FXCollections.observableArrayList(studentBox.getAll());
-
         studentsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
         lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
         studentsTable.setItems(studentsCollection);
-
 
         // Obtenemos todas las materias y las mostramos a travez de la ObservableList: subjectsCollection
         ObservableList<Subject> subjectsCollection = FXCollections.observableArrayList(subjectBox.getAll());
@@ -143,8 +137,7 @@ public class AssignController implements Initializable {
         teacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacher"));
         subjectTable.setItems(subjectsCollection);
 
-
-        //<editor-fold desc="Dinamic search alumnos">
+        //<editor-fold desc="Search studetns">
 
         // Filtered list de alumnos
         FilteredList<Student> studentsFilteredData = new FilteredList<>(studentsCollection, b -> true);
@@ -160,17 +153,9 @@ public class AssignController implements Initializable {
                     return true;
                 } else if (student.getSurname().toLowerCase().contains(searchedText)) {
                     return true;
-
                 } else if (student.getLastname().toLowerCase().contains(searchedText)) {
                     return true;
-
-                } else if (student.getAge().toLowerCase().contains(searchedText)) {
-                    return true;
-
-                } else {
-                    return false;
-                }
-
+                } else return student.getAge().toLowerCase().contains(searchedText);
             });
         });
 
@@ -183,10 +168,9 @@ public class AssignController implements Initializable {
 
         //</editor-fold>
 
+        //<editor-fold desc="Search subjects">
 
-        //<editor-fold desc="Dinamic search materias">
-
-        // Filtered list de mateias
+        // Creamos Subjects filtered list
         FilteredList<Subject> subjectsFilteredData = new FilteredList<>(subjectsCollection, b -> true);
         // Lambda function para hacer la busqueda dinamica de materias
         subjectSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -198,12 +182,7 @@ public class AssignController implements Initializable {
                 String searchedText = newValue.toLowerCase();
                 if (subject.getName().toLowerCase().contains(searchedText)) {
                     return true;
-                } else if (subject.getTeacher().toLowerCase().contains(searchedText)) {
-                    return true;
-
-                } else {
-                    return false;
-                }
+                } else return subject.getTeacher().toLowerCase().contains(searchedText);
             });
         });
 
@@ -217,6 +196,4 @@ public class AssignController implements Initializable {
         //</editor-fold>
 
     }
-
-
 }

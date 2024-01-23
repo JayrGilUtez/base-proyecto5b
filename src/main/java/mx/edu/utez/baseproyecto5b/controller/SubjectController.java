@@ -1,7 +1,6 @@
 package mx.edu.utez.baseproyecto5b.controller;
 
 import io.objectbox.Box;
-import io.objectbox.BoxStore;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,11 +23,8 @@ import java.util.ResourceBundle;
 public class SubjectController implements Initializable {
 
     //<editor-fold desc="BoxStore">
-    BoxStore boxStore = BoxStoreManager.getBoxStore();
     Box<Subject> subjectBox = BoxStoreManager.getBoxStore().boxFor(Subject.class);
-
     //</editor-fold>
-
 
     //<editor-fold desc="textFields">
 
@@ -40,9 +36,7 @@ public class SubjectController implements Initializable {
 
     //</editor-fold>
 
-
     //<editor-fold desc="tableView">
-
 
     @FXML
     private TableView<Subject> tableView = new TableView<>();
@@ -71,7 +65,7 @@ public class SubjectController implements Initializable {
 
     //</editor-fold>
 
-    //<editor-fold desc="OnActions">
+    //<editor-fold desc="onClick methods">
 
     @FXML
     void onBackButtonClick() {
@@ -86,13 +80,12 @@ public class SubjectController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     @FXML
     void onDeleteButtonClick() {
         List<Subject> subjectsSelected = tableView.getSelectionModel().getSelectedItems();
-        for(Subject subject : subjectsSelected){
+        for (Subject subject : subjectsSelected) {
             subjectBox.remove(subject);
         }
         refreshTableData();
@@ -108,13 +101,11 @@ public class SubjectController implements Initializable {
             refreshTableData();
         }
         cleanTextFields();
-
     }
 
     @FXML
     void onUpdateButtonClick() {
         refreshTableData();
-
     }
 
     @FXML
@@ -124,7 +115,7 @@ public class SubjectController implements Initializable {
     }
 
     @FXML
-    private void cleanTextFields(){
+    private void cleanTextFields() {
         txtFieldSubject.setText("");
         txtFieldTeacher.setText("");
     }
@@ -136,45 +127,44 @@ public class SubjectController implements Initializable {
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         subjectColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         teacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacher"));
+        // Agredamos los datos a la tabla
         tableView.setItems(subjectsCollection);
 
+        // Para actualizar los datos que hayan sido editados por medio de las celdas
         updateData();
-        // solo para ver los datos alamacenados en la consola
+
+        //Con esto podemos ver por medio de la consola los datos
+        //alamacenados en la base de datos y verificar que las relaciones esten funcionando correctamente
         List<Subject> list = subjectBox.getAll();
         System.out.println("------------------------------------------------------");
         for (Subject subject : list) {
-            System.out.println("Materia: " + subject.getName() + "\nAlumnos:\n");
-            for(Student s : subject.students){
-                System.out.println("- "+ s);
+            System.out.println("Materia: " + subject.getName() + " - " + subject.getTeacher() + "\nAlumnos:");
+            for (Student s : subject.students) {
+                System.out.println("- " + s);
             }
             System.out.println("------------------------------------------------------");
         }
-
     }
 
+    //<editor-fold desc="Edit and updateData">
 
-    //<editor-fold desc="Methods">
-
+    // Este metodo es para poder editar y actualizar los datos por medio de las celdas
     private void updateData() {
+        // to edit subject cell
         subjectColumn.setCellFactory(TextFieldTableCell.<Subject>forTableColumn());
         subjectColumn.setOnEditCommit(event -> {
             Subject subject = event.getTableView().getItems().get(event.getTablePosition().getRow());
             subject.setName((event.getNewValue()));
             subjectBox.put(subject);
         });
-
-        // ---
-
+        // to edit teacher cell
         teacherColumn.setCellFactory(TextFieldTableCell.<Subject>forTableColumn());
         teacherColumn.setOnEditCommit(event -> {
             Subject subject = event.getTableView().getItems().get(event.getTablePosition().getRow());
             subject.setTeacher((event.getNewValue()));
             subjectBox.put(subject);
         });
-
     }
-
     //</editor-fold>
-
 
 }

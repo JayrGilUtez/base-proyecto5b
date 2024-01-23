@@ -13,7 +13,6 @@ public class Subject {
     private String teacher;
     @Backlink(to = "subjects")
     public ToMany<Student> students;
-    //</editor-fold>
 
     public Subject() {
 
@@ -59,9 +58,8 @@ public class Subject {
     @Override
     public String toString() {
         return name;
-
-
     }
+
     /*
     return "Subject {" + "name: " + name + "teacher:" + teather +"}";
      */
